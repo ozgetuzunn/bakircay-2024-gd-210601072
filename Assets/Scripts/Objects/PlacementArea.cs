@@ -1,7 +1,10 @@
 using UnityEngine;
+using TMPro;
+using DG.Tweening;
 
 public class PlacementArea : MonoBehaviour
 {
+    public UIManager uiManager;
     private bool isOccupied = false;
 
 private void OnTriggerEnter(Collider other)
@@ -12,13 +15,14 @@ private void OnTriggerEnter(Collider other)
         other.transform.position = transform.position;
         isOccupied = true;
 
-        // Animasyon oynat
+        uiManager.AddScore(5); // 5 puan ekle
         other.GetComponent<ObjectAnimation>().PlayCorrectPlacementAnimation();
     }
     else if (other.CompareTag("Draggable"))
     {
         // Yanlış yerleştirme
         Debug.Log("Placement area is already occupied!");
+        uiManager.ReduceLife(); // Can azalt
         other.GetComponent<ObjectAnimation>().PlayIncorrectPlacementAnimation();
     }
 }
