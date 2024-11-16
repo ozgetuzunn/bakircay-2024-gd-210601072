@@ -1,30 +1,33 @@
 using UnityEngine;
-using TMPro;
 using DG.Tweening;
 
 public class PlacementArea : MonoBehaviour
 {
     public UIManager uiManager;
     public AudioManager audioManager;
-    private bool isOccupied = false;
     public ParticleManager particleManager;
+
+    private bool isOccupied = false;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Draggable") && !isOccupied)
         {
+            // Nesneyi yerleştir
             other.transform.position = transform.position;
             isOccupied = true;
 
+            // Başarılı işlem
             uiManager.AddScore(5);
-            audioManager.PlaySuccessSound(); // Başarılı ses
+            audioManager.PlaySuccessSound();
             particleManager.PlaySuccessParticles(other.transform.position);
             other.GetComponent<ObjectAnimation>().PlayCorrectPlacementAnimation();
         }
         else if (other.CompareTag("Draggable"))
         {
+            // Yanlış yerleştirme
             uiManager.ReduceLife();
-            audioManager.PlayErrorSound(); // Hata sesi
+            audioManager.PlayErrorSound();
             other.GetComponent<ObjectAnimation>().PlayIncorrectPlacementAnimation();
         }
     }
@@ -33,7 +36,6 @@ public class PlacementArea : MonoBehaviour
     {
         if (other.CompareTag("Draggable"))
         {
-            // Alan boşaltıldığında
             isOccupied = false;
         }
     }

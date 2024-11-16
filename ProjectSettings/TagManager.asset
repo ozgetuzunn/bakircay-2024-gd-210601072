@@ -8,6 +8,7 @@ TagManager:
   - Green
   - Yellow
   - Red
+  - Bomb
   layers:
   - Default
   - TransparentFX

@@ -1,9 +1,12 @@
 using UnityEngine;
 
-public class DragAndDrop : MonoBehaviour
+public class ObjectDragAndDrop : MonoBehaviour
 {
     private Vector3 offset;
     private Camera mainCamera;
+
+    // Yükseklik sınırı için minimum değer
+    [SerializeField] private float minYPosition = 1.0f; // Ground seviyesindeki Y değeri
 
     private void Start()
     {
@@ -19,7 +22,12 @@ public class DragAndDrop : MonoBehaviour
     private void OnMouseDrag()
     {
         // Sürükleme sırasında nesneyi takip ettir
-        transform.position = GetMouseWorldPosition() + offset;
+        Vector3 targetPosition = GetMouseWorldPosition() + offset;
+
+        // Y pozisyonunu minimum seviyeye sabitle
+        targetPosition.y = Mathf.Max(targetPosition.y, minYPosition);
+
+        transform.position = targetPosition;
     }
 
     private Vector3 GetMouseWorldPosition()
