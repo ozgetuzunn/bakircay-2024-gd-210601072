@@ -135,6 +135,7 @@ GameObject:
   - component: {fileID: 295679249}
   - component: {fileID: 295679248}
   - component: {fileID: 295679247}
+  - component: {fileID: 295679252}
   m_Layer: 0
   m_Name: AreaYellow
   m_TagString: Untagged
@@ -151,8 +152,8 @@ Transform:
   m_GameObject: {fileID: 295679245}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalPosition: {x: -3.0000002, y: 0.6, z: 0}
+  m_LocalScale: {x: 2, y: 0.1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 621953611}
@@ -245,6 +246,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295679245}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &295679252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 295679245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ab4710f0be64a48a4ad97f2b3f49e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredTag: Yellow
 --- !u!1 &325785822
 GameObject:
   m_ObjectHideFlags: 0
@@ -5219,7 +5233,7 @@ GameObject:
   - component: {fileID: 506710305}
   m_Layer: 0
   m_Name: CubeYellow
-  m_TagString: Draggable
+  m_TagString: Yellow
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5755,6 +5769,7 @@ GameObject:
   - component: {fileID: 1094075818}
   - component: {fileID: 1094075817}
   - component: {fileID: 1094075816}
+  - component: {fileID: 1094075821}
   m_Layer: 0
   m_Name: AreaGreen
   m_TagString: Untagged
@@ -5772,7 +5787,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalScale: {x: 2, y: 0.1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 621953611}
@@ -5865,6 +5880,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1094075814}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1094075821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1094075814}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ab4710f0be64a48a4ad97f2b3f49e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredTag: Green
 --- !u!1 &1120568099
 GameObject:
   m_ObjectHideFlags: 0
@@ -6016,7 +6044,7 @@ GameObject:
   - component: {fileID: 1156463106}
   m_Layer: 0
   m_Name: CubeGreen
-  m_TagString: Draggable
+  m_TagString: Green
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6827,7 +6855,7 @@ GameObject:
   - component: {fileID: 1843110924}
   m_Layer: 0
   m_Name: CubeRed
-  m_TagString: Draggable
+  m_TagString: Red
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7057,6 +7085,7 @@ GameObject:
   - component: {fileID: 2014676030}
   - component: {fileID: 2014676029}
   - component: {fileID: 2014676028}
+  - component: {fileID: 2014676033}
   m_Layer: 0
   m_Name: AreaRed
   m_TagString: Untagged
@@ -7073,8 +7102,8 @@ Transform:
   m_GameObject: {fileID: 2014676026}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.5, y: 0.6, z: 0}
-  m_LocalScale: {x: 1, y: 0.1, z: 1}
+  m_LocalPosition: {x: 2.9999998, y: 0.6, z: 0}
+  m_LocalScale: {x: 2, y: 0.1, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 621953611}
@@ -7167,6 +7196,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2014676026}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2014676033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014676026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ab4710f0be64a48a4ad97f2b3f49e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  requiredTag: Red
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
