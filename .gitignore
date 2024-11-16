@@ -1,0 +1,36 @@
+# Unity Generated Files
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Mm]emoryCaptures/
+UserSettings/
+
+# Crash Reports
+*.crash
+
+# Unity Asset Meta Files
+*.pidb.meta
+*.pidb
+
+# Visual Studio
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+
+# OS Specific
+.DS_Store
+Thumbs.db
+
+# Package Files
+*.unitypackage
+
+# Hidden Folders
+.idea/
+.vscode/
