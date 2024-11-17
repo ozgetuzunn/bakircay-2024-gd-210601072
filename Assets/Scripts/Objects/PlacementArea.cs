@@ -3,39 +3,53 @@ using DG.Tweening;
 
 public class PlacementArea : MonoBehaviour
 {
-    public UIManager uiManager;
-    public AudioManager audioManager;
-    public ParticleManager particleManager;
+    public string requiredTag; // This area accepts this tag
+    public AudioManager audioManager; // Reference to AudioManager
+    public ParticleManager particleManager; // Reference to ParticleManager
 
     private bool isOccupied = false;
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Draggable") && !isOccupied)
+        // Get the UIManager from the scene
+        UIManager uiManager = FindObjectOfType<UIManager>();
+
+        if (!isOccupied && other.CompareTag(requiredTag))
         {
-            // Nesneyi yerleştir
-            other.transform.position = transform.position;
+            // Correct object placed
+            other.transform.position = transform.position; // Position the object
             isOccupied = true;
 
-            // Başarılı işlem
-            uiManager.AddScore(5);
+            // Play success feedback
             audioManager.PlaySuccessSound();
-            particleManager.PlaySuccessParticles(other.transform.position);
+            particleManager.PlaySuccessParticles(transform.position);
             other.GetComponent<ObjectAnimation>().PlayCorrectPlacementAnimation();
+
+            // Add score
+            GameManager.Instance.AddScore(5);
+            uiManager.UpdateUI(); // Update the UI
         }
-        else if (other.CompareTag("Draggable"))
+        else if (!isOccupied)
         {
-            // Yanlış yerleştirme
-            uiManager.ReduceLife();
+            // Wrong object placed
+            GameManager.Instance.ReduceLife(); // Reduce lives
+            GameManager.Instance.AddScore(-10); // Deduct score
+            uiManager.UpdateUI(); // Update the UI
+
+            // Play error feedback
             audioManager.PlayErrorSound();
             other.GetComponent<ObjectAnimation>().PlayIncorrectPlacementAnimation();
+
+            // Shake camera for visual feedback
+            Camera.main.DOShakePosition(0.5f, strength: new Vector3(0.3f, 0.3f, 0));
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Draggable"))
+        if (other.CompareTag(requiredTag) || other.CompareTag("Draggable"))
         {
+            // Reset the occupied state
             isOccupied = false;
         }
     }

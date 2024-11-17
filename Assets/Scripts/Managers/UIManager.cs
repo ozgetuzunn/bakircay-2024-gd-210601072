@@ -8,27 +8,32 @@ public class UIManager : MonoBehaviour
     public GameObject[] hearts;
     public TextMeshProUGUI motivationText;
 
-    private int score = 0;
-    private int lives = 3;
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject); // UIManager'ın taşınmasını sağlar
+    }
 
-    // Motivasyon mesajları dizisi (arttırıldı)
-    private string[] motivationMessages = {
-    "Harika!",
-    "Mükemmel!",
-    "Muhteşem!",
-    "Devam et!",
-    "Çok İyi!",
-    "Fantastik!",
-    "Sen Harikasın!",
-    "Durdurulamazsın!"
-};
+    private void Start()
+    {
+        UpdateUI();
+    }
 
-    private int currentMessageIndex = 0;
+    public void UpdateUI()
+    {
+        // Skor UI güncelleme
+        scoreText.text = $"Score: {GameManager.Instance.score}";
+
+        // Can UI güncelleme
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            hearts[i].SetActive(i < GameManager.Instance.lives);
+        }
+    }
 
     public void AddScore(int points)
     {
-        score += points;
-        scoreText.text = $"{score}";
+        GameManager.Instance.AddScore(points); // GameManager üzerinden skor ekle
+        UpdateUI();
 
         if (points > 0)
         {
@@ -36,53 +41,36 @@ public class UIManager : MonoBehaviour
         }
         else if (points < 0)
         {
-            // Bomb yerleştirme mesajı
             motivationText.text = "Yiyecek koyun!";
-            motivationText.gameObject.SetActive(true);
-
-            // Animasyon oynat ve kapat
-            motivationText.DOFade(0, 1).OnComplete(() =>
-            {
-                motivationText.gameObject.SetActive(false);
-                motivationText.DOFade(1, 0); // Opaklığı geri yükle
-            });
+            PlayFadeAnimation(motivationText);
         }
-    }
-
-
-    private void ShowMotivationText()
-    {
-        // Şu anki mesajı göster
-        motivationText.text = motivationMessages[currentMessageIndex];
-        motivationText.gameObject.SetActive(true);
-
-        // Animasyon oynat ve kapat
-        motivationText.DOFade(0, 1).OnComplete(() =>
-        {
-            motivationText.gameObject.SetActive(false);
-            motivationText.DOFade(1, 0); // Opaklığı geri yükle
-        });
-
-        // Bir sonraki mesaja geç
-        currentMessageIndex = (currentMessageIndex + 1) % motivationMessages.Length;
     }
 
     public void ReduceLife()
     {
-        if (lives > 0)
-        {
-            lives--;
-            hearts[lives].SetActive(false);
+        GameManager.Instance.ReduceLife(); // Can azaltma işlemi
+        UpdateUI();
+    }
 
-            // Kırmızı ekran titremesi
-            Camera.main.DOShakePosition(0.5f, strength: 0.3f);
-            // Ekrana kırmızı ton efekti eklenebilir
-        }
+    private void ShowMotivationText()
+    {
+        string[] motivationMessages = {
+            "Harika!", "Mükemmel!", "Muhteşem!", "Devam et!",
+            "Çok İyi!", "Fantastik!", "Sen Harikasın!", "Durdurulamazsın!"
+        };
+        int randomIndex = Random.Range(0, motivationMessages.Length);
 
-        if (lives == 0)
+        motivationText.text = motivationMessages[randomIndex];
+        PlayFadeAnimation(motivationText);
+    }
+
+    private void PlayFadeAnimation(TextMeshProUGUI text)
+    {
+        text.gameObject.SetActive(true);
+        text.DOFade(0, 1).OnComplete(() =>
         {
-            Debug.Log("Game Over!");
-            // Oyunu bitirme işlemleri burada yapılabilir.
-        }
+            text.gameObject.SetActive(false);
+            text.DOFade(1, 0); // Opaklığı geri yükle
+        });
     }
 }
