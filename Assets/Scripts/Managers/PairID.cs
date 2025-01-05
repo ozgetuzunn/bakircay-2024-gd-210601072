@@ -2,5 +2,6 @@ using UnityEngine;
 
 public class PairID : MonoBehaviour
 {
-    public int pairID; // Her çift için benzersiz bir ID
+    [Tooltip("Bu nesnenin ait olduğu çiftin ID değeridir.")]
+    public int pairID;
 }

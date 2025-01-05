@@ -1,21 +1,23 @@
 ﻿<Properties StartupConfiguration="{44E6383E-12AA-75F5-8292-9ADFED346213}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Physics/ObjectDragAndDrop.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Objects/FinalPlacementArea.cs">
     <Files>
       <File FileName="Assets/Scripts/Utils/LevelTimer.cs" Line="18" Column="83" />
-      <File FileName="Assets/Scripts/Physics/ObjectDragAndDrop.cs" Line="34" Column="32" />
+      <File FileName="Assets/Scripts/Physics/ObjectDragAndDrop.cs" Line="60" Column="1" />
       <File FileName="Assets/Scripts/Objects/PlacementArea.cs" Line="56" Column="2" />
-      <File FileName="Assets/Scripts/Managers/AudioManager.cs" Line="24" Column="1" />
+      <File FileName="Assets/Scripts/Managers/AudioManager.cs" Line="25" Column="1" />
       <File FileName="Assets/Scripts/Managers/GameManager.cs" Line="84" Column="6" />
       <File FileName="Assets/Scripts/Managers/LevelManager.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Managers/ParticleManager.cs" Line="26" Column="2" />
+      <File FileName="Assets/Scripts/Managers/ParticleManager.cs" Line="27" Column="1" />
       <File FileName="Assets/Scripts/Managers/TutorialManager.cs" Line="12" Column="1" />
       <File FileName="Assets/Scripts/Managers/UIManager.cs" Line="32" Column="1" />
-      <File FileName="Assets/Scripts/Animations/ObjectAnimation.cs" Line="34" Column="6" />
-      <File FileName="Assets/Scripts/Managers/PairID.cs" Line="6" Column="2" />
-      <File FileName="Assets/Scripts/Objects/Spawner.cs" Line="36" Column="42" />
+      <File FileName="Assets/Scripts/Animations/ObjectAnimation.cs" Line="27" Column="36" />
+      <File FileName="Assets/Scripts/Managers/PairID.cs" Line="8" Column="1" />
+      <File FileName="Assets/Scripts/Objects/Spawner.cs" Line="27" Column="10" />
       <File FileName="Assets/Scripts/Objects/ObjectSelfDestruct.cs" Line="15" Column="1" />
       <File FileName="Assets/Scripts/Managers/EndScreenManager.cs" Line="1" Column="1" />
       <File FileName="Assets/Scripts/Objects/MovingPlacementArea.cs" Line="27" Column="50" />
+      <File FileName="Assets/Scripts/Animations/FinalObjectsAnimation.cs" Line="4" Column="35" />
+      <File FileName="Assets/Scripts/Objects/FinalPlacementArea.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -25,10 +27,10 @@
               <Node name="Scripts" expanded="True">
                 <Node name="Animations" expanded="True" />
                 <Node name="Managers" expanded="True" />
-                <Node name="Objects" expanded="True" />
-                <Node name="Physics" expanded="True">
-                  <Node name="ObjectDragAndDrop.cs" selected="True" />
+                <Node name="Objects" expanded="True">
+                  <Node name="FinalPlacementArea.cs" selected="True" />
                 </Node>
+                <Node name="Physics" expanded="True" />
               </Node>
             </Node>
           </Node>
