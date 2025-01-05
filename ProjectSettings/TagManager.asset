@@ -9,6 +9,9 @@ TagManager:
   - Yellow
   - Red
   - Bomb
+  - Object1
+  - ObjectA
+  - ObjectB
   layers:
   - Default
   - TransparentFX
