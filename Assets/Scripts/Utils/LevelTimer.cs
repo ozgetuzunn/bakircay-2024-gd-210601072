@@ -15,7 +15,7 @@ public class LevelTimer : MonoBehaviour
         {
             // Süre dolduğunda
             Debug.Log("Time's up! Game Over!");
-            SceneManager.LoadScene("GameOverScene"); // Game Over sahnesine geçiş
+            SceneManager.LoadScene("GameOverScene"); // Game Over sahnesine geçişS
         }
 
         // Timer UI'sini güncelle
