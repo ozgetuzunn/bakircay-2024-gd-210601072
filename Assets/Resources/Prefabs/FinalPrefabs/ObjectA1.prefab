@@ -125,6 +125,7 @@ MonoBehaviour:
   maxXPosition: 10
   minZPosition: -10
   maxZPosition: 10
+  dragSpeed: 50
 --- !u!54 &7684523107484794339
 Rigidbody:
   m_ObjectHideFlags: 0
