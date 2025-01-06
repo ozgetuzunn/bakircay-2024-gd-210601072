@@ -12,6 +12,7 @@ TagManager:
   - Object1
   - ObjectA
   - ObjectB
+  - ObjectC
   layers:
   - Default
   - TransparentFX

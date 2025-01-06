@@ -3,26 +3,29 @@ using DG.Tweening;
 
 public class FinalObjectsAnimation : MonoBehaviour
 {
-    [Header("Animasyon Ayarları")]
-    [SerializeField] private float correctScaleFactor = 1.2f;
-    [SerializeField] private float correctScaleTime = 0.3f;
-    [SerializeField] private float throwDistance = 3f;
-    [SerializeField] private float throwTime = 0.5f;
-    [SerializeField] private float disappearTime = 0.3f;
+    public float correctScaleFactor = 1.2f;
+    public float correctScaleTime = 0.3f;
+    public float throwDistance = 3f;
+    public float throwTime = 0.5f;
+    public float disappearTime = 0.3f;
 
     public void PlayCorrectPlacementAnimation(System.Action onComplete = null)
     {
+        Debug.Log($"FinalObjectsAnimation: {gameObject.name} PlayCorrectPlacementAnimation()");
+
         Sequence seq = DOTween.Sequence();
-        seq.Append(transform.DOScale(transform.localScale * correctScaleFactor, correctScaleTime)
-            .SetLoops(2, LoopType.Yoyo));
+        seq.Append(transform.DOScale(transform.localScale * correctScaleFactor, correctScaleTime).SetLoops(2, LoopType.Yoyo));
         seq.OnComplete(() =>
         {
+            Debug.Log($"FinalObjectsAnimation: {gameObject.name} correct animation complete.");
             onComplete?.Invoke();
         });
     }
 
     public void PlayIncorrectPlacementAnimation(System.Action onComplete = null)
     {
+        Debug.Log($"FinalObjectsAnimation: {gameObject.name} PlayIncorrectPlacementAnimation()");
+
         Vector3 randomDir = new Vector3(Random.Range(-1f, 1f), 0.5f, Random.Range(-1f, 1f)).normalized;
         Vector3 targetPos = transform.position + randomDir * throwDistance;
 
@@ -31,13 +34,20 @@ public class FinalObjectsAnimation : MonoBehaviour
         seq.Join(transform.DOScale(transform.localScale * 0.8f, throwTime));
         seq.OnComplete(() =>
         {
+            Debug.Log($"FinalObjectsAnimation: {gameObject.name} incorrect animation complete.");
             onComplete?.Invoke();
         });
     }
 
     public void PlayDisappearAnimation()
     {
+        Debug.Log($"FinalObjectsAnimation: {gameObject.name} PlayDisappearAnimation() -> Will destroy object.");
+
         transform.DOScale(Vector3.zero, disappearTime)
-                 .OnComplete(() => Destroy(gameObject));
+                 .OnComplete(() =>
+                 {
+                     Debug.Log($"FinalObjectsAnimation: {gameObject.name} destroyed.");
+                     Destroy(gameObject);
+                 });
     }
 }
