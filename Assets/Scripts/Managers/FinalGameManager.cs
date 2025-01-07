@@ -21,16 +21,20 @@ public class FinalGameManager : MonoBehaviour
     public int lives = 3;    // Can sayısı
 
     [Header("Wave / Level Mechanics")]
-    public int currentWave = 1;      // Şu anki dalga
-    public int maxWaveCount = 3;     // Kaç dalga sonuna kadar devam etsin?
-    public bool infiniteWaves = false; // Sonsuz dalga seçeneği istersen
+    public int currentWave = 1;
+
+    // 10 dalga:
+    public int maxWaveCount = 10;
+    public bool infiniteWaves = false;
+
+    // ========== YETENEK EKLEMELERİ =============
+    [HideInInspector] public bool isScoreMultiplierActive = false; // Yetenek1: Skor Katlayıcı
 
     // Final sahnede NESNELERİ üretmek için:
     public FinalSpawner finalSpawner;
 
     private void Awake()
     {
-        // Singleton yaklaşımı
         if (instance == null)
         {
             instance = this;
@@ -48,7 +52,6 @@ public class FinalGameManager : MonoBehaviour
     {
         Debug.Log($"FinalGameManager Start: currentWave={currentWave}");
 
-        // Sahne başlar başlamaz ilk dalga spawn
         if (finalSpawner != null)
         {
             Debug.Log($"FinalGameManager: Calling SpawnWave({currentWave})");
@@ -62,8 +65,19 @@ public class FinalGameManager : MonoBehaviour
 
     public void AddScore(int amount)
     {
-        score += amount;
-        Debug.Log($"FinalGameManager AddScore: amount={amount}, new score={score}");
+        int finalAmount = amount;
+
+        // Eğer skor katlayıcı aktifse, bu eklemeyi 2x yapıyoruz.
+        if (isScoreMultiplierActive && amount > 0) // Sadece pozitif skor arttırmalarda katla
+        {
+            finalAmount = amount * 2;
+            // Bir kez kullanıldıktan sonra kapatalım
+            isScoreMultiplierActive = false;
+            Debug.Log("Skor katlayıcı kullanıldı. Sonraki eşleşmede devre dışı kalacak.");
+        }
+
+        score += finalAmount;
+        Debug.Log($"FinalGameManager AddScore: amount={finalAmount}, new score={score}");
         FinalUIManager.Instance?.UpdateUI();
     }
 
@@ -82,26 +96,33 @@ public class FinalGameManager : MonoBehaviour
         FinalUIManager.Instance?.UpdateUI();
     }
 
-    /// <summary>
-    /// Wave bittiğinde Spawner tarafından çağrılacak.
-    /// </summary>
+    // ========== Ek Can Fonksiyonu ===========
+    public void AddLife(int amount)
+    {
+        lives += amount;
+        Debug.Log($"FinalGameManager AddLife: amount={amount}, new lives={lives}");
+        FinalUIManager.Instance?.UpdateUI();
+    }
+    // =======================================
+
     public void OnWaveCleared()
     {
         Debug.Log($"FinalGameManager OnWaveCleared: Wave {currentWave} is cleared.");
 
         if (infiniteWaves)
         {
-            // Sonsuz dalga
+            // Sonsuz dalga modu
             currentWave++;
             Debug.Log($"FinalGameManager OnWaveCleared: Next wave is {currentWave} (infinite mode).");
             finalSpawner.SpawnWave(currentWave);
         }
         else
         {
-            // Sınırlı dalga
+            // Sınırlı dalga (burada 10 dalga)
             currentWave++;
             Debug.Log($"FinalGameManager OnWaveCleared: Next wave is {currentWave} (limited mode).");
 
+            // currentWave, maxWaveCount (10)'u geçerse oyunu kazanmış oluyoruz.
             if (currentWave > maxWaveCount)
             {
                 Debug.Log("Tüm dalgalar tamamlandı! Tebrikler!");
@@ -113,8 +134,7 @@ public class FinalGameManager : MonoBehaviour
             }
         }
 
-        // UI güncelle
-        Debug.Log($"FinalGameManager OnWaveCleared: currentWave is now {currentWave}. Updating UI.");
+        // Dalga atlaması tamamlandıktan sonra UI güncelle
         FinalUIManager.Instance?.UpdateUI();
     }
 }

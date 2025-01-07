@@ -6,6 +6,13 @@ public class FinalSpawner : MonoBehaviour
     public GameObject[] wave1Prefabs;
     public GameObject[] wave2Prefabs;
     public GameObject[] wave3Prefabs;
+    public GameObject[] wave4Prefabs;
+    public GameObject[] wave5Prefabs;
+    public GameObject[] wave6Prefabs;
+    public GameObject[] wave7Prefabs;
+    public GameObject[] wave8Prefabs;
+    public GameObject[] wave9Prefabs;
+    public GameObject[] wave10Prefabs;
 
     [Header("Spawn Points")]
     public Transform[] spawnPoints;
@@ -16,6 +23,7 @@ public class FinalSpawner : MonoBehaviour
     {
         Debug.Log($"FinalSpawner SpawnWave: waveNumber={waveNumber}");
 
+        // Hangi dalga ise ona uygun prefab dizisini seçiyoruz.
         GameObject[] selectedPrefabs = null;
         switch (waveNumber)
         {
@@ -28,18 +36,47 @@ public class FinalSpawner : MonoBehaviour
             case 3:
                 selectedPrefabs = wave3Prefabs;
                 break;
+            case 4:
+                selectedPrefabs = wave4Prefabs;
+                break;
+            case 5:
+                selectedPrefabs = wave5Prefabs;
+                break;
+            case 6:
+                selectedPrefabs = wave6Prefabs;
+                break;
+            case 7:
+                selectedPrefabs = wave7Prefabs;
+                break;
+            case 8:
+                selectedPrefabs = wave8Prefabs;
+                break;
+            case 9:
+                selectedPrefabs = wave9Prefabs;
+                break;
+            case 10:
+                selectedPrefabs = wave10Prefabs;
+                break;
             default:
-                selectedPrefabs = wave1Prefabs;
+                // 10'dan büyük dalgalar gelirse,
+                // yine wave10Prefabs kullanabilir ya da kendi mantığınızı ekleyebilirsiniz.
+                Debug.LogWarning($"Dalga sayısı ({waveNumber}) 10'u aştı! " +
+                                 "Burada isterseniz infinite wave mantığı ekleyebilirsiniz.");
+                selectedPrefabs = wave10Prefabs;
                 break;
         }
 
+        // Seçili prefab dizisi boş mu?
         if (selectedPrefabs == null || selectedPrefabs.Length == 0)
         {
             Debug.LogWarning($"No prefabs found for wave {waveNumber}");
             return;
         }
 
+        // Prefableri saklayacağımız dizi
         activeObjects = new GameObject[selectedPrefabs.Length];
+
+        // Prefableri rasgele spawn noktasında instantiate ediyoruz
         for (int i = 0; i < selectedPrefabs.Length; i++)
         {
             if (spawnPoints == null || spawnPoints.Length == 0)
@@ -77,8 +114,7 @@ public class FinalSpawner : MonoBehaviour
         }
         Debug.Log($"remaining={remaining}");
 
-        // BURADAKİ KOŞULU DEĞİŞTİRDİK:
-        // "remaining == 0" yerine "remaining <= 1" kontrolü yapıyoruz.
+        // "remaining <= 1" kontrolü yapıyoruz (örneğin Boss dalgasında son bir enemy kalsa bile dalga bitsin diye).
         if (remaining <= 1)
         {
             Debug.Log("remaining <= 1: Forcing wave cleared!");
