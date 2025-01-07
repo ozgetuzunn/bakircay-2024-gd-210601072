@@ -3,6 +3,7 @@ using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.Collections;
+using DG.Tweening;
 
 public class FinalUIManager : MonoBehaviour
 {
@@ -104,6 +105,7 @@ public class FinalUIManager : MonoBehaviour
             FinalGameManager.Instance.isScoreMultiplierActive = true;
             ShowInfoMessage("Skor 2'ye katlanacak!"); // Bilgi mesajı
             StartCoroutine(HandleAbilityCooldown(ability1Button, cooldownText1, 1));
+            ability1Button.transform.DOPunchScale(Vector3.one * 0.5f, 0.3f, 5, 1);
         }
         else if (abilityIndex == 2 && !ability2OnCooldown)
         {
@@ -111,6 +113,7 @@ public class FinalUIManager : MonoBehaviour
             ShowInfoMessage("+1 Can Eklendi!"); // Bilgi mesajı
             UpdateUI();
             StartCoroutine(HandleAbilityCooldown(ability2Button, cooldownText2, 2));
+            ability2Button.transform.DOPunchScale(Vector3.one * 0.5f, 0.3f, 5, 1);
         }
     }
 
